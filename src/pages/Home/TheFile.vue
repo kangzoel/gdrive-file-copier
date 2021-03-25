@@ -27,7 +27,7 @@
                 <span v-if="copiedDate !== null">
                   {{ copiedDateFormatted }}
                 </span>
-                <span v-else>...</span>
+                <span v-else>generating...</span>
               </td>
             </tr>
           </table>

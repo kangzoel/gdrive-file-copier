@@ -191,23 +191,21 @@ export default {
           this.copying = "";
 
           this.prepareDedicatedFolder(`gdrive-file-copier-${user.Aa}`)
-            .then((res) => {
-              this.checkIfFileIsExists(res, data.name)
+            .then(({ folderId }) => {
+              this.checkIfFileIsExists(folderId, data.name)
                 // file is exists
                 .then(({ data }) => {
                   this.fileCopiedDate = new Date().toISOString();
                   this.fileCopiedDownloadLink = data.webContentLink;
                 })
                 // file is not exists
-                .catch((msg) => {
-                  console.error("emasdk", msg);
-
+                .catch(() => {
                   axios(
                     `https://www.googleapis.com/drive/v3/files/${fileId}/copy`,
                     {
                       method: "POST",
                       params: { fields: "*" },
-                      data: { parents: [res] },
+                      data: { parents: [folderId] },
                     }
                   )
                     .then(({ data }) => {
