@@ -91,6 +91,8 @@ export default {
             if (authIsCanceled) {
               reject();
             } else {
+              commit("SET_AUTHORIZED_STATUS", true);
+
               resolve();
             }
 

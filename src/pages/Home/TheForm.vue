@@ -101,20 +101,27 @@ export default {
 
   watch: {
     authorized: {
-      immediate: true,
       handler: function (isSignedIn) {
-        if (!isSignedIn) {
+        if (isSignedIn == false) {
           this.loading = false;
           this.copying = "";
           this.authIsFailed = false;
+          this.file = null;
+          this.fileCopiedDate = null;
+          this.fileCopiedDownloadLink = "";
+          this.storageQuotaExceeded = false;
           this.form = {
             url: "",
           };
+
+          this.setOauthToken(null);
         } else {
           const user = window.gapi.auth2.getAuthInstance().currentUser.get();
           const oauthToken = user.getAuthResponse().access_token;
 
-          this.setOauthToken(oauthToken);
+          if (typeof oauthToken !== "undefined") {
+            this.setOauthToken(oauthToken);
+          }
         }
       },
     },
@@ -193,7 +200,7 @@ export default {
                 })
                 // file is not exists
                 .catch((msg) => {
-                  console.log(msg);
+                  console.error("emasdk", msg);
 
                   axios(
                     `https://www.googleapis.com/drive/v3/files/${fileId}/copy`,
@@ -216,11 +223,11 @@ export default {
                     });
                 });
             })
-            .catch((err) => console.log(err)); // prepareDedicatedFolder
+            .catch((err) => console.error("12312", err)); // prepareDedicatedFolder
         })
         .catch((err) => {
-          console.log(err);
-        }) // fetch file info
+          console.error("sadwd", err);
+        })
         .finally(() => {
           this.loading = false;
           document.querySelector("#url-input").blur();
