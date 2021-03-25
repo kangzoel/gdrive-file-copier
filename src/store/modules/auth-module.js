@@ -41,7 +41,7 @@ export default {
           .init({
             clientId:
               "930329239171-5aco5v8spv1pvh1t7upto7g2pil6mumq.apps.googleusercontent.com",
-            apiKey: "byNASzsRQNNdTCZ9IwIBOtgT",
+            apiKey: "AIzaSyA_iHmPkgOYo5wH3AnCK2t7KWy4bfibJcE",
             discoveryDocs: DISCOVERY_DOCS,
             scope: SCOPES
           })
