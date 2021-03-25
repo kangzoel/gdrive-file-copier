@@ -39,8 +39,9 @@ export default {
       window.gapi.load("client:auth2", function() {
         window.gapi.client
           .init({
-            clientId: process.env.VUE_APP_GOOGLE_DRIVE_CLIENT_ID,
-            apiKey: process.env.VUE_APP_GOOGLE_DRIVE_API_KEY,
+            clientId:
+              "930329239171-5aco5v8spv1pvh1t7upto7g2pil6mumq.apps.googleusercontent.com",
+            apiKey: "byNASzsRQNNdTCZ9IwIBOtgT",
             discoveryDocs: DISCOVERY_DOCS,
             scope: SCOPES
           })
